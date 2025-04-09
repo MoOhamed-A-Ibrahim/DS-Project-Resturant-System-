@@ -19,10 +19,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Order.h" />
     <ClInclude Include="Resturant.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Order.cpp" />
     <ClCompile Include="Resturant.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
