@@ -19,13 +19,16 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Node.h" />
     <ClInclude Include="Order.h" />
     <ClInclude Include="Resturant.h" />
+    <ClInclude Include="WaitingNormal.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Order.cpp" />
     <ClCompile Include="Resturant.cpp" />
+    <ClCompile Include="WaitingNormal.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
