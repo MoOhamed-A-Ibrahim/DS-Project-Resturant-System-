@@ -13,7 +13,7 @@ int WaitingVegan::getType() const
 
 void WaitingVegan::setType(int t)
 {
-	type=1
+	type = 1;
 }
 
 bool WaitingVegan::isAvailable()
@@ -29,6 +29,17 @@ int WaitingVegan::getCount() const
 void WaitingVegan::setCount(int c)
 {
 	Count = c;
+}
+
+
+void WaitingVegan::setRT(int rt)
+{
+	RT = rt;
+}
+
+int WaitingVegan::getRT() const
+{
+	return RT;
 }
 
 void WaitingVegan::Assign(double P, string S)

@@ -31,6 +31,16 @@ void WaitingNormal::setCount(int c)
     Count = c;
 }
 
+void WaitingNormal::setRT(int rt)
+{
+	RT = rt;
+}
+
+int WaitingNormal::getRT() const
+{
+	return RT;
+}
+
 void WaitingNormal::Assign(double P, string S)
 {
 	if (!front)

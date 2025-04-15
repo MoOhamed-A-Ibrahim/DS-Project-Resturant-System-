@@ -7,6 +7,7 @@ class WaitingNormal : Order
 	int type=1;								
 	bool available;
 	int Count = 0;
+	int RT = 0;
 	Node* front = NULL;
 	Node* rear = NULL;
 
@@ -17,6 +18,8 @@ public:
 	virtual bool isAvailable() override;
 	int getCount() const;
 	void setCount(int c);
+	void setRT(int rt);
+	int getRT() const;
 
 	// Queue Operations
 	

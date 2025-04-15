@@ -1,31 +1,29 @@
 #pragma once
+
+#pragma once
 #include "Order.h"
 #include "Node.h"
 
-
-class WaitingVegan : Order
+class WaitingVIP : Order
 {
-	int type = 1;
+	int type = 3;
 	bool available;
-	int RT;
 	int Count = 0;
 	Node* front = NULL;
 	Node* rear = NULL;
 
 public:
-	WaitingVegan(int t = 1, double p = 0);
+	WaitingVIP(int t = 3, double p = 0, int s = 0);
 	virtual int getType() const override;
 	virtual void setType(int t) override;
 	virtual bool isAvailable() override;
 	int getCount() const;
 	void setCount(int c);
-	void setRT(int rt);
-	int getRT() const;
-
 	// Queue Operations
 
-	void Assign(double P, string S); // Enquqe Operation
+	void Assign(double P, string S, int size); // Enquqe Operation
 
 	Node* Serve();            //Dequeue Operation
 };
+
 
