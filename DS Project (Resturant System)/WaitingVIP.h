@@ -19,9 +19,10 @@ public:
 	virtual bool isAvailable() override;
 	int getCount() const;
 	void setCount(int c);
+	double CalcPripority(double price, int size, int TR);
 	// Queue Operations
 
-	void Assign(double P, string S, int size); // Enquqe Operation
+	void Assign(double P, string S, int size, int TR); // Enquqe Operation
 
 	Node* Serve();            //Dequeue Operation
 };
