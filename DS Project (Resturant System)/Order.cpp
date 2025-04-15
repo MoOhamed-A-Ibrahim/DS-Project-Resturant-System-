@@ -26,3 +26,8 @@ void Order::setType(int t)
 {
 	type = t;
 }
+
+bool Order::isAvailable()
+{
+	return available;
+}
