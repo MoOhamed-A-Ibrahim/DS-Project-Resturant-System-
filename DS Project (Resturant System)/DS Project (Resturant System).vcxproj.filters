@@ -21,15 +21,15 @@
     <ClInclude Include="Order.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Lab5 -  Queues and Priority Queues\Code Examples\5-PriorityQueue\priNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Lab5 -  Queues and Priority Queues\Code Examples\5-PriorityQueue\priQueue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Resturant.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Order.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="QueueADT.h">
