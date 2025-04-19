@@ -37,13 +37,15 @@ Single Node Case:
 					-----------
 
 */
-
+#pragma once
 #ifndef LINKED_QUEUE_
 #define LINKED_QUEUE_
 
-
+#include <iostream>
 #include "Node.h"
 #include "QueueADT.h"
+
+using namespace std;
 
 template <typename T>
 class LinkedQueue :public QueueADT<T>

@@ -22,7 +22,7 @@ public:
 		///Priority Setting///
 		if (OrderType == 3)
 		{
-			Priority = ((price / 1500) * 100 + (Size / 10) * 100 + WT); // Assuming Price range of 1500 EGP, Size of maximum 10 Orders
+			Priority = ((price / 1500) * 100 + (Size / static_cast<double>(10)) * 100 + WT); // Assuming Price range of 1500 EGP, Size of maximum 10 Orders
 		}
 	}
 	~Order() {};
@@ -62,11 +62,11 @@ public:
 	{
 		Size = s;
 	}
-	Type stringToOrderType(const string& str) {
+	Type stringToOrderType(const string& str) 
+	{
 		if (str == "Normal") return Normal;
 		else if (str == "Vegan") return Vegan;
 		else if (str == "VIP") return VIP;
-		else return;
 	}
 	double getPriority()
 	{

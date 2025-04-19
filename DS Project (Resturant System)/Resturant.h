@@ -2,6 +2,8 @@
 #include "LinkedQueue.h"
 #include "PriQueue.h"
 #include "Order.h"
+#include "Chef.h"
+#include <fstream>
 
 using namespace std;
 
@@ -15,9 +17,24 @@ public:
 	{
 
 	}
-	void Run();
-	void ReadFromFile();
-	void ASSign(string Name, double Price, int Size)
+	
+	// Use All functions to run the game //
+	void Run()
+	{
+
+	}
+	
+	// Read Line From File // 
+	void ReadFromFile(const string& FileName)
+	{
+		ifstream inputFile(FileName);
+
+
+	}
+
+
+	// Assign Waiting Orders Loaded From File to Waiting Lists//
+	void ASSignWaiting(string Name, double Price, int Size)
 	{
 		Order* NewOrder = new Order(Name, Price, CurrentTime, Size);
 		int type = NewOrder->stringToOrderType(Name);
@@ -34,11 +51,18 @@ public:
 			break;
 		}
 
-	}
+	} 
+
+
+	void PutInService(){}
+
 
 private:
 
 	int CurrentTime;
+	int VIPcooks;
+	int NormalCooks;
+	int VeganCooks;
 
 	///  Orders Lists ///
 
@@ -51,7 +75,7 @@ private:
 
 	//// Cooks Lists ///
 
-	LinkedQueue<Order*> ReadyVIP;
-	LinkedQueue<Order*> ReadyVegan;
-	LinkedQueue<Order*> ReadyNormal;
+	LinkedQueue<Chef*> ReadyVIP;
+	LinkedQueue<Chef*> ReadyVegan;
+	LinkedQueue<Chef*> ReadyNormal;
 };

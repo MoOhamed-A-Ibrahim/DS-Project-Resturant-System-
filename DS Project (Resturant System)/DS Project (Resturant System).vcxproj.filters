@@ -27,6 +27,9 @@
     <ClInclude Include="priNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Chef.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
