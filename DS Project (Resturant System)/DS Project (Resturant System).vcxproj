@@ -19,9 +19,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\Lab5 -  Queues and Priority Queues\Code Examples\5-PriorityQueue\priNode.h" />
-    <ClInclude Include="..\..\..\Lab5 -  Queues and Priority Queues\Code Examples\5-PriorityQueue\priQueue.h" />
+    <ClInclude Include="Chef.h" />
     <ClInclude Include="Order.h" />
+    <ClInclude Include="priNode.h" />
+    <ClInclude Include="PriQueue.h" />
     <ClInclude Include="Resturant.h" />
   </ItemGroup>
   <ItemGroup>

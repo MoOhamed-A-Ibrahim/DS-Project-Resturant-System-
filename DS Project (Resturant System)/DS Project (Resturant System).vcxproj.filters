@@ -15,16 +15,19 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Resturant.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Order.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Lab5 -  Queues and Priority Queues\Code Examples\5-PriorityQueue\priNode.h">
+    <ClInclude Include="Resturant.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Lab5 -  Queues and Priority Queues\Code Examples\5-PriorityQueue\priQueue.h">
+    <ClInclude Include="PriQueue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="priNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Chef.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
