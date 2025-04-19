@@ -19,7 +19,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Chef.h" />
     <ClInclude Include="Order.h" />
     <ClInclude Include="priNode.h" />
     <ClInclude Include="PriQueue.h" />
