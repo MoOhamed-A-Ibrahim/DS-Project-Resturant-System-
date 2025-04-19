@@ -68,6 +68,10 @@ public:
 		else if (str == "VIP") return VIP;
 		else return;
 	}
+	double getPriority()
+	{
+		return Priority;
+	}
 
 private:
 	double price = 0;
