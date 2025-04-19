@@ -1,34 +1,62 @@
-#pragma once
-#include <iostream>
-#include "string.h"
-using namespace std;
 
+#ifndef _NODE
+#define _NODE
+template <typename T>
 class Node
 {
+protected:
+	T item; // A data item
+	Node<T>* next; // Pointer to next node
 public:
-	Node(double p, string n, int rt, int s)
-	{
-		Name = n;
-		price = p;
-		RT = rt;
-		Size = s;
-	}
-	~Node() {};
-	void setNext(Node* N);
-	void setPrice(double p);
-	Node* getNext() const;
-	double getPrice() const;
-	string getName() const;
-	int getSize() const;
-	void setRT(int rt);
-	int getRT() const;
-	void setSize(int s);
+	Node();
+	Node(const T& r_Item);
+	Node(const T& r_Item, Node<T>* nextNodePtr);
+	void setItem(const T& r_Item);
+	void setNext(Node<T>* nextNodePtr);
+	T getItem() const;
+	Node<T>* getNext() const;
+}; // end Node
+#endif
 
-private:
-	double price = 0;
-	string Name = "";
-	Node* Next = NULL;
-	int RT;
-	int Size
-};
+template < typename T>
+Node<T>::Node()
+{
+	next = nullptr;
+}
 
+template < typename T>
+Node<T>::Node(const T& r_Item)
+{
+	item = r_Item;
+	next = nullptr;
+}
+
+template < typename T>
+Node<T>::Node(const T& r_Item, Node<T>* nextNodePtr)
+{
+	item = r_Item;
+	next = nextNodePtr;
+}
+template < typename T>
+void Node<T>::setItem(const T& r_Item)
+{
+	item = r_Item;
+}
+
+template < typename T>
+void Node<T>::setNext(Node<T>* nextNodePtr)
+{
+	next = nextNodePtr;
+}
+
+template < typename T>
+T Node<T>::getItem() const
+{
+	return item;
+}
+
+template < typename T>
+Node<T>* Node<T>::getNext() const
+{
+	return next;
+}

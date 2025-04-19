@@ -21,40 +21,25 @@
     <ClInclude Include="Order.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="WaitingNormal.h">
+    <ClInclude Include="..\..\..\Lab5 -  Queues and Priority Queues\Code Examples\5-PriorityQueue\priNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Node.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="WaitingVegan.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="WaitingVIP.h">
+    <ClInclude Include="..\..\..\Lab5 -  Queues and Priority Queues\Code Examples\5-PriorityQueue\priQueue.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Resturant.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Order.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="QueueADT.h">
+      <Filter>Header Files</Filter>
     </ClCompile>
-    <ClCompile Include="WaitingNormal.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="LinkedQueue.h">
+      <Filter>Header Files</Filter>
     </ClCompile>
-    <ClCompile Include="WaitingVegan.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="WaitingVIP.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Node.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Node.h">
+      <Filter>Header Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
