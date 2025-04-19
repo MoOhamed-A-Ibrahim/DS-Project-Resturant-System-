@@ -1,33 +1,54 @@
 #include "Order.h"
 
-Order::Order(int t, double p)
+Order::Order(string n, double p, int rt, int s)
 {
-	type = t;
-	price = p;
-	available = true;
+    Type = n;
+    price = p;
+    RT = rt;
+    Size = s;
 }
 
-int Order::getType() const
+void Order::setNext(Order* N)
 {
-	return type;
-}
-
-double Order::getPrice() const
-{
-	return price;
+    Next = N;
 }
 
 void Order::setPrice(double p)
 {
-	price = p;
+    price = p;
 }
 
-void Order::setType(int t)
+Order* Order::getNext() const
 {
-	type = t;
+    return Next;
 }
 
-bool Order::isAvailable()
+double Order::getPrice() const
 {
-	return available;
+    return price;
+}
+
+string Order::getType() const
+{
+    return Type;
+}
+
+int Order::getSize() const
+{
+    return Size;
+}
+
+void Order::setRT(int rt)
+{
+    RT = rt;
+}
+
+int Order::getRT() const
+{
+    return RT;
+}
+
+void Order::setSize(int s)
+{
+    Size = s
 }

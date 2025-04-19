@@ -19,21 +19,16 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Node.h" />
     <ClInclude Include="Order.h" />
     <ClInclude Include="Resturant.h" />
-    <ClInclude Include="WaitingNormal.h" />
-    <ClInclude Include="WaitingVegan.h" />
-    <ClInclude Include="WaitingVIP.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="LinkedQueue.h" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Node.cpp" />
+    <ClCompile Include="Node.h" />
     <ClCompile Include="Order.cpp" />
+    <ClCompile Include="QueueADT.h" />
     <ClCompile Include="Resturant.cpp" />
-    <ClCompile Include="WaitingNormal.cpp" />
-    <ClCompile Include="WaitingVegan.cpp" />
-    <ClCompile Include="WaitingVIP.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

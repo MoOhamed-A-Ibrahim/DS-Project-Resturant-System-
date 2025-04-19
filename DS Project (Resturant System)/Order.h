@@ -1,19 +1,30 @@
 #pragma once
-#include <string>
+#include <iostream>
+#include "string.h"
+#include "Node.h"
 using namespace std;
 
-class Order
+template <typename T>
+class Order : Node<T>
 {
-protected:
-	int type;					//Type of the order (1:Normal 2:Vegan 3:VIP)
-	double price;				//Price
-	bool available;				//Indicates weather the order is available or not
 public:
-	Order(int t = 1, double p = 0);
-	virtual int getType() const;
-	virtual double getPrice() const;
-	virtual void setPrice(double p);
-	virtual void setType(int t);
-	virtual bool isAvailable();
+	Order(string n, double p, int rt, int s);
+	~Order() {};
+	void setNext(Order* N);
+	void setPrice(double p);
+	Order* getNext() const;
+	double getPrice() const;
+	string getType() const;
+	int getSize() const;
+	void setRT(int rt);
+	int getRT() const;
+	void setSize(int s);
+
+private:
+	double price = 0;
+	string Type = "";
+	Order* Next = NULL;
+	int RT;
+	int Size;
 };
 
