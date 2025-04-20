@@ -55,13 +55,14 @@ public:
 			string Name;
 			double price;
 			int size, id;
-			iss >> Name >> CurrentTime >> id >>  size >> price ;
-			ASSign(Name, price, size, id);			
+			int RT;
+			iss >> Name >> RT >> id >>  size >> price ;
+			ASSign(Name, price, RT,  size, id);			
 		}
 	}
-	void ASSign(string Name, double Price, int Size,int ID)
+	void ASSign(string Name, double Price,int RT,  int Size,int ID)
 	{
-		Order* NewOrder = new Order(Name, Price, CurrentTime, Size,ID);
+		Order* NewOrder = new Order(Name, Price, RT, Size,ID);
 		int type = NewOrder->stringToOrderType(Name);
 		switch (type)
 		{
