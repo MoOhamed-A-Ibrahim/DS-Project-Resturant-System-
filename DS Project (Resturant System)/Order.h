@@ -22,7 +22,7 @@ public:
 		///Priority Setting///
 		if (OrderType == 3)
 		{
-			Priority = ((price / 1500) * 100 + (Size / static_cast<double>(10)) * 100 + WT); // Assuming Price range of 1500 EGP, Size of maximum 10 Orders
+			Priority = ((price / 1500) * 100 + (Size / static_cast<double>(10)) * 100 + WT); // Assuming Price range of 1500 EGP, Size of maximum 10 Dishes
 		}
 	}
 	~Order() {};
