@@ -18,7 +18,7 @@ public:
         int p;
         while (dequeue(tmp, p));
     }
-
+    
     //insert the new node in its correct position according to its priority
     void enqueue(const T& data, int priority) {
         priNode<T>* newNode = new priNode<T>(data, priority);
@@ -53,7 +53,7 @@ public:
         if (isEmpty())
             return false;
 
-        topEntry = head->getItem();
+        topEntry = head->getItem(pri);
         pri = head->getPri();
         return true;
     }
@@ -65,7 +65,6 @@ public:
         priNode<T>* current = head;
 
         if (isEmpty()) {
-            cout << "-------------\n|   EMPTY   |\n-------------\n";
             return;
         }
 

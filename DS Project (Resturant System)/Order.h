@@ -4,6 +4,7 @@
 #include <ostream>
 using namespace std;
 
+class Chef;
 enum Type
 {
 	Normal=1, Vegan=2, VIP=3
@@ -24,7 +25,7 @@ public:
 		{
 
 
-			Priority = ((price / 1500) * 100 + (Size / static_cast<double>(10)) * 100 + WT); // Assuming Price range of 1500 EGP, Size of maximum 10 Dishes
+			Priority = ((price / 1500) * 100 + (Size / static_cast<double>(10)) * 100 - RT); // Assuming Price range of 1500 EGP, Size of maximum 10 Dishes
 
 		}
 	}
@@ -54,6 +55,18 @@ public:
 	{
 		return RT;
 	}
+	void setST(int ft)
+	{
+		ST = ft;
+	}
+	int getST() const
+	{
+		return ST;
+	}
+	int getFT() const
+	{
+		return FT;
+	}
 	void setID(int ID)
 	{
 		id = ID;
@@ -62,14 +75,25 @@ public:
 	{
 		return id;
 	}
-	void setWT(int currentTime)
+	void setAT(int currentTime)
 	{
-		WT = (currentTime - RT);
+		AT = currentTime;
+	}
+	int getAT()
+	{
+		return AT;
+	}
+	void calcWT() {
+		WT = RT + AT;
+	}
+	void calcFT() {
+		FT = RT + WT + ST;
 	}
 	int getWT() const 
 	{
 		return WT;
 	}
+
 	void setSize(int s)
 	{
 		Size = s;
@@ -84,16 +108,28 @@ public:
 		return Priority;
 	}
 	friend ostream& operator<<(ostream& os, const Order& order);
-	
+	void setAssignedChef(Chef* chef) {
+		AssignedChef = chef;
+	}
+
+	Chef* getAssignedChef() const {
+		return AssignedChef;
+	}
+
 
 private:
 	double price = 0;
 	Type OrderType;
 	int RT;
 	int id;
-	int WT;
+	int WT=0;
+	int FT=0;
+	int AT;
+	int ST;
 	int Size;
 	double Priority;
+	Chef* AssignedChef = nullptr;
+
 };
 
 

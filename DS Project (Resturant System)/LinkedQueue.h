@@ -57,6 +57,7 @@ public:
 	LinkedQueue();
 	bool isEmpty() const;
 	void printQueue() const;
+	
 	bool enqueue(const T& newEntry);
 	bool dequeue(T& frntEntry);
 	bool peek(T& frntEntry)  const;
@@ -169,6 +170,7 @@ bool LinkedQueue<T>::peek(T& frntEntry) const
 	return true;
 
 }
+
 template<typename T>
 inline int LinkedQueue<T>::numberOfElements(int& currentTime)
 {
@@ -202,7 +204,6 @@ void LinkedQueue<T>::printQueue() const {
 	Node<T>* current = frontPtr;
 
 	if (isEmpty()) {
-		cout << "-------------\n|   EMPTY   |\n-------------\n";
 		return;
 	}
 	current = frontPtr;
@@ -214,6 +215,9 @@ void LinkedQueue<T>::printQueue() const {
 		current = current->getNext();
 	}	
 }
+
+
+
 
 
 
