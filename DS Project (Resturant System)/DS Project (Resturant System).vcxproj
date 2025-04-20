@@ -19,7 +19,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Chef.h" />
     <ClInclude Include="Order.h" />
     <ClInclude Include="priNode.h" />
     <ClInclude Include="PriQueue.h" />
@@ -29,7 +28,12 @@
     <ClCompile Include="LinkedQueue.h" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Node.h" />
+    <ClCompile Include="Order.cpp" />
     <ClCompile Include="QueueADT.h" />
+    <ClCompile Include="Resturant.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Input.txt" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

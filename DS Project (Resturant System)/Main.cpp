@@ -2,7 +2,11 @@
 #include "Resturant.h"
 using namespace std;
 
-int main()
-{
+int main() {
 
+	Resturant R;
+	R.ReadFromFile();
+	
+
+	return 0;
 }

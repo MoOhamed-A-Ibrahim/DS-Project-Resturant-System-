@@ -37,16 +37,15 @@ Single Node Case:
 					-----------
 
 */
-#pragma once
+
 #ifndef LINKED_QUEUE_
 #define LINKED_QUEUE_
 
-#include <iostream>
+
 #include "Node.h"
 #include "QueueADT.h"
-
+#include <iostream>
 using namespace std;
-
 template <typename T>
 class LinkedQueue :public QueueADT<T>
 {
@@ -56,6 +55,7 @@ private:
 public:
 	LinkedQueue();
 	bool isEmpty() const;
+	void printQueue() const;
 	bool enqueue(const T& newEntry);
 	bool dequeue(T& frntEntry);
 	bool peek(T& frntEntry)  const;
@@ -166,6 +166,26 @@ bool LinkedQueue<T>::peek(T& frntEntry) const
 	return true;
 
 }
+template <typename T>
+void LinkedQueue<T>::printQueue() const {
+	Node<T>* current = frontPtr;
+
+	if (isEmpty()) {
+		cout << "-------------\n|   EMPTY   |\n-------------\n";
+		return;
+	}
+	current = frontPtr;
+	while (current != nullptr) {
+		stringstream ss;
+		ss << *(current->getItem()); 
+		string content = ss.str();
+		cout  << content;
+		current = current->getNext();
+	}	
+}
+
+
+
 ///////////////////////////////////////////////////////////////////////////////////
 
 template <typename T>
@@ -173,15 +193,15 @@ LinkedQueue<T>::~LinkedQueue()
 {
 	//Note that the cout statements here is just for learning purpose
 	//They should be normally removed from the destructor
-	cout << "\nStarting LinkedQueue destructor...";
-	cout << "\nFreeing all nodes in the queue...";
+	//cout << "\nStarting LinkedQueue destructor...";
+	//cout << "\nFreeing all nodes in the queue...";
 
-	//Free all nodes in the queue
-	T temp;
-	while (dequeue(temp));
+	////Free all nodes in the queue
+	//T temp;
+	//while (dequeue(temp));
 
-	cout << "\n Is LinkedQueue Empty now?? ==> " << boolalpha << isEmpty();
-	cout << "\nEnding LinkedQueue destructor..." << endl;
+	//cout << "\n Is LinkedQueue Empty now?? ==> " << boolalpha << isEmpty();
+	//cout << "\nEnding LinkedQueue destructor..." << endl;
 }
 
 #endif

@@ -2,8 +2,9 @@
 #include "LinkedQueue.h"
 #include "PriQueue.h"
 #include "Order.h"
-#include "Chef.h"
 #include <fstream>
+#include <sstream>
+#include <string>
 
 using namespace std;
 
@@ -17,26 +18,50 @@ public:
 	{
 
 	}
-	
-	// Use All functions to run the game //
-	void Run()
-	{
+	void Run() {
+		ReadFromFile();
+		int choice;
+		cout << "================== Welcome The Resturant Simulation ==================\n";
+		cout << "Choose one of the following modes: \n(1) Silent Mode\n(2) Interactive Mode\n Your choice: ";
+		cin >> choice;
+		if (choice == 1) {
+			cout << "Simulation started in Silent Mode";
+			// Call function to output file
+			cout << "Simulation ended, Output file is created";
+		}
 
 	}
-	
-	// Read Line From File // 
-	void ReadFromFile(const string& FileName)
-	{
-		ifstream inputFile(FileName);
+	void ReadFromFile() {
+		ifstream file;
+		file.open("Input.txt");
+		string line;
+		if (getline(file, line)) {
+			istringstream iss(line);
+			iss >> N >> G>>V;
+		}
+		if (getline(file, line)) {
+			istringstream iss(line);
+			iss >> SN >> SG >> SV;
+		}
+		if (getline(file, line)) {
+			istringstream iss(line);
+			iss >> M;
+		}
 
-
+		
+		
+		for (int i = 0; i < M && getline(file, line); ++i) {
+			istringstream iss(line);
+			string Name;
+			double price;
+			int size, id;
+			iss >> Name >> CurrentTime >> id >>  size >> price ;
+			ASSign(Name, price, size, id);			
+		}
 	}
-
-
-	// Assign Waiting Orders Loaded From File to Waiting Lists//
-	void ASSignWaiting(string Name, double Price, int Size)
+	void ASSign(string Name, double Price, int Size,int ID)
 	{
-		Order* NewOrder = new Order(Name, Price, CurrentTime, Size);
+		Order* NewOrder = new Order(Name, Price, CurrentTime, Size,ID);
 		int type = NewOrder->stringToOrderType(Name);
 		switch (type)
 		{
@@ -51,19 +76,12 @@ public:
 			break;
 		}
 
-	} 
-
-
-	void PutInService(){}
-
+	}
 
 private:
 
 	int CurrentTime;
-	int VIPcooks;
-	int NormalCooks;
-	int VeganCooks;
-
+	int N=0, G=0, V=0, SN=0, SV=0, SG=0, M=0;
 	///  Orders Lists ///
 
 	LinkedQueue<Order*> AllOrdersList;
@@ -75,7 +93,7 @@ private:
 
 	//// Cooks Lists ///
 
-	LinkedQueue<Chef*> ReadyVIP;
-	LinkedQueue<Chef*> ReadyVegan;
-	LinkedQueue<Chef*> ReadyNormal;
+	LinkedQueue<Order*> ReadyVIP;
+	LinkedQueue<Order*> ReadyVegan;
+	LinkedQueue<Order*> ReadyNormal;
 };

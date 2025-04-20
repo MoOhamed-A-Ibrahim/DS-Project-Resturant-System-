@@ -1,7 +1,7 @@
 #pragma once
 #include <iostream>
 #include "string.h"
-
+#include <ostream>
 using namespace std;
 
 enum Type
@@ -11,21 +11,25 @@ enum Type
 class Order 
 {
 public:
-	Order(string n, double p, int rt, int s) 
+	Order(string n, double p, int rt, int s,int ID) 
 	{
 		OrderType = stringToOrderType(n);
 		price = p;
 		RT = rt;
 		Size = s;
-
+		id = ID;
 
 		///Priority Setting///
 		if (OrderType == 3)
 		{
+
+
 			Priority = ((price / 1500) * 100 + (Size / static_cast<double>(10)) * 100 + WT); // Assuming Price range of 1500 EGP, Size of maximum 10 Dishes
+
 		}
 	}
 	~Order() {};
+
 	void setPrice(double p)
 	{
 		price = p;
@@ -50,6 +54,14 @@ public:
 	{
 		return RT;
 	}
+	void setID(int ID)
+	{
+		id = ID;
+	}
+	int getID() const
+	{
+		return id;
+	}
 	void setWT(int currentTime)
 	{
 		WT = (currentTime - RT);
@@ -62,23 +74,26 @@ public:
 	{
 		Size = s;
 	}
-	Type stringToOrderType(const string& str) 
-	{
-		if (str == "Normal") return Normal;
-		else if (str == "Vegan") return Vegan;
-		else if (str == "VIP") return VIP;
+	Type stringToOrderType(const string& str) {
+		if (str == "G") return Vegan;
+		else if (str == "V") return VIP;
+		else return Normal;
 	}
-	double getPriority()
+	double getPriority() const
 	{
 		return Priority;
 	}
+	friend ostream& operator<<(ostream& os, const Order& order);
+	
 
 private:
 	double price = 0;
 	Type OrderType;
 	int RT;
+	int id;
 	int WT;
 	int Size;
 	double Priority;
 };
+
 
