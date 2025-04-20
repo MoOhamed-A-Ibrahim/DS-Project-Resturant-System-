@@ -2,6 +2,9 @@
 #include "LinkedQueue.h"
 #include "PriQueue.h"
 #include "Order.h"
+#include <fstream>
+#include <sstream>
+#include <string>
 
 using namespace std;
 
@@ -15,11 +18,50 @@ public:
 	{
 
 	}
-	void Run();
-	void ReadFromFile();
-	void ASSign(string Name, double Price, int Size)
+	void Run() {
+		ReadFromFile();
+		int choice;
+		cout << "================== Welcome The Resturant Simulation ==================\n";
+		cout << "Choose one of the following modes: \n(1) Silent Mode\n(2) Interactive Mode\n Your choice: ";
+		cin >> choice;
+		if (choice == 1) {
+			cout << "Simulation started in Silent Mode";
+			// Call function to output file
+			cout << "Simulation ended, Output file is created";
+		}
+
+	}
+	void ReadFromFile() {
+		ifstream file;
+		file.open("Input.txt");
+		string line;
+		if (getline(file, line)) {
+			istringstream iss(line);
+			iss >> N >> G>>V;
+		}
+		if (getline(file, line)) {
+			istringstream iss(line);
+			iss >> SN >> SG >> SV;
+		}
+		if (getline(file, line)) {
+			istringstream iss(line);
+			iss >> M;
+		}
+
+		
+		
+		for (int i = 0; i < M && getline(file, line); ++i) {
+			istringstream iss(line);
+			string Name;
+			double price;
+			int size, id;
+			iss >> Name >> CurrentTime >> id >>  size >> price ;
+			ASSign(Name, price, size, id);			
+		}
+	}
+	void ASSign(string Name, double Price, int Size,int ID)
 	{
-		Order* NewOrder = new Order(Name, Price, CurrentTime, Size);
+		Order* NewOrder = new Order(Name, Price, CurrentTime, Size,ID);
 		int type = NewOrder->stringToOrderType(Name);
 		switch (type)
 		{
@@ -39,7 +81,7 @@ public:
 private:
 
 	int CurrentTime;
-
+	int N=0, G=0, V=0, SN=0, SV=0, SG=0, M=0;
 	///  Orders Lists ///
 
 	LinkedQueue<Order*> AllOrdersList;
