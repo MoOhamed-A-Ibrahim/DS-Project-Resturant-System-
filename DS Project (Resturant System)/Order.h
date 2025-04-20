@@ -84,7 +84,7 @@ public:
 		return AT;
 	}
 	void calcWT() {
-		WT = RT + AT;
+		WT = AT - RT;
 	}
 	void calcFT() {
 		FT = RT + WT + ST;

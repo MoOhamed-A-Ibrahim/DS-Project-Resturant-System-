@@ -30,7 +30,7 @@ public:
 		if (choice == 1) {
 			cout << "Simulation started in Silent Mode";
 			// Call function to output file
-			for (int i = 0; i <= 100; i++) {
+			for (int i = 0; i <= 10000; i++) {
 				CurrentTime = i;
 				ReturnFinishedCooks();
 				PutInService();
@@ -39,7 +39,7 @@ public:
 			cout << "Simulation ended, Output file is created";
 		}
 		else if (choice == 2) {
-			for (int i = 0; i <= 100; i++) {
+			for (int i = 0; i <= 10000; i++) {
 				CurrentTime = i;
 				ReturnFinishedCooks();
 				cout << "===========================================================================\n";
@@ -228,7 +228,7 @@ public:
 				InserviceOrders.enqueue(vipOrder, pri);
 				
 				BusyChefs.enqueue(cook);
-				V--;
+				if(V!= 0 ) V--;
 			}
 			else break;
 		}
@@ -262,7 +262,7 @@ public:
 				InserviceOrders.enqueue(veganOrder, pri);
 
 				BusyChefs.enqueue(cook);
-				G--;
+				if(G !=0) G--;
 			}
 			else break;
 		}
@@ -298,7 +298,7 @@ public:
 				InserviceOrders.enqueue(normalOrder, pri);
 
 				BusyChefs.enqueue(cook);
-				N--;
+				if(N != 0) N--;
 			}
 			else break;
 		}
