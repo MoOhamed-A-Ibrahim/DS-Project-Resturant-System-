@@ -5,6 +5,7 @@
 #include <fstream>
 #include <sstream>
 #include <string>
+#include "Chef.h"
 
 using namespace std;
 
@@ -18,7 +19,8 @@ public:
 	{
 
 	}
-	void Run() {
+	void Run() 
+	{
 		ReadFromFile();
 		int choice;
 		cout << "================== Welcome The Resturant Simulation ==================\n";
@@ -78,6 +80,24 @@ public:
 		}
 
 	}
+	void ASSignCooks()
+	{
+		for (int i = 0; i < V; i++)
+		{
+			Chef* NewChef = new Chef("VIP", SV);
+			ReadyVIP.enqueue(NewChef);
+		}
+		for (int i = 0; i <G; i++)
+		{
+			Chef* NewChef = new Chef("Vegan", SG);
+			ReadyVIP.enqueue(NewChef);
+		}
+		for (int i = 0; i < N; i++)
+		{
+			Chef* NewChef = new Chef("Normal", SN);
+			ReadyVIP.enqueue(NewChef);
+		}
+	}
 
 private:
 
@@ -86,15 +106,15 @@ private:
 	///  Orders Lists ///
 
 	LinkedQueue<Order*> AllOrdersList;
-	LinkedQueue<Order*> WaitingVegan;
-	LinkedQueue<Order*> WaitingNormal;
-	LinkedQueue<Order*> DeliveredOrders;
-	priQueue<Order*> WaitingVIP;
+	LinkedQueue<Order*> WaitingVegan;                 ///Initialized
+	LinkedQueue<Order*> WaitingNormal;                ///Initialized
+	LinkedQueue<Order*> DeliveredOrders;              
+	priQueue<Order*> WaitingVIP;                      ///Initialized
 	priQueue<Order*> InserviceOrders;
 
 	//// Cooks Lists ///
 
-	LinkedQueue<Order*> ReadyVIP;
-	LinkedQueue<Order*> ReadyVegan;
-	LinkedQueue<Order*> ReadyNormal;
+	LinkedQueue<Chef*> ReadyVIP;                      ///Initialized
+	LinkedQueue<Chef*> ReadyVegan;                    ///Initialized 
+	LinkedQueue<Chef*> ReadyNormal;                   ///Initialized
 };
