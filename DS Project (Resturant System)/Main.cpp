@@ -5,7 +5,7 @@ using namespace std;
 int main() {
 
 	Resturant R;
-	R.ReadFromFile();
+	R.Run();
 	
 
 	return 0;
