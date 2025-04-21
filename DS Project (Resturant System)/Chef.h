@@ -6,10 +6,7 @@
 using namespace std;
 
 
-enum Type
-{
-	Normal = 1, Vegan = 2, VIP = 3
-};
+
 class Chef
 {
 public:
