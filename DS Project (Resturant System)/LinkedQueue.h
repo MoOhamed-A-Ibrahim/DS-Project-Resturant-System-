@@ -53,12 +53,16 @@ private:
 	Node<T>* backPtr;
 	Node<T>* frontPtr;
 public:
+	int count = 0;
 	LinkedQueue();
 	bool isEmpty() const;
 	void printQueue() const;
+	
 	bool enqueue(const T& newEntry);
 	bool dequeue(T& frntEntry);
 	bool peek(T& frntEntry)  const;
+	int numberOfElements(int& currentTime);
+	void printQueueRTBased(int& currentTime) const;
 	~LinkedQueue();
 };
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -166,12 +170,40 @@ bool LinkedQueue<T>::peek(T& frntEntry) const
 	return true;
 
 }
+
+template<typename T>
+inline int LinkedQueue<T>::numberOfElements(int& currentTime)
+{
+	Node<T>* current = frontPtr;
+	while (current != nullptr) {
+		T item = current->getItem();
+		if (item->getRT() == currentTime) {
+			count++;
+		}
+	
+		current = current->getNext();
+		return count;
+	}
+}
+template<typename T>
+inline void LinkedQueue<T>::printQueueRTBased(int& currentTime) const
+{
+	Node<T>* current = frontPtr;
+	while (current != nullptr) {
+		T item = current->getItem();
+		if (item->getRT() <= currentTime) {
+			stringstream ss;
+			ss << *item;
+			cout << ss.str();
+		}
+		current = current->getNext();
+	}
+}
 template <typename T>
 void LinkedQueue<T>::printQueue() const {
 	Node<T>* current = frontPtr;
 
 	if (isEmpty()) {
-		cout << "-------------\n|   EMPTY   |\n-------------\n";
 		return;
 	}
 	current = frontPtr;
@@ -183,6 +215,9 @@ void LinkedQueue<T>::printQueue() const {
 		current = current->getNext();
 	}	
 }
+
+
+
 
 
 

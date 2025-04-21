@@ -26,6 +26,7 @@
     <ClInclude Include="Resturant.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Chef.cpp" />
     <ClCompile Include="LinkedQueue.h" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Node.h" />
