@@ -227,6 +227,16 @@ public:
 				ReadyVegan.dequeue(cook);
 				
 			}
+			else if (!ReadySeaFood.isEmpty())
+			{
+				ReadySeaFood.dequeue(cook);
+
+			}
+			else if (!ReadyFastFood.isEmpty())
+			{
+				ReadyFastFood.dequeue(cook);
+
+			}
 
 			if (cook)
 			{
@@ -317,6 +327,75 @@ public:
 			}
 			else break;
 		}
+
+		// --- Handle FastFood Orders ---
+		while (!WaitingFastFood.isEmpty())
+		{
+			Order* FastFoodOrder;
+			if (!WaitingFastFood.peek(FastFoodOrder)) break;
+
+			if (FastFoodOrder->getRT() > CurrentTime) break;
+
+			Chef* cook = nullptr;
+
+
+			if (!ReadyFastFood.isEmpty())
+				ReadyFastFood.dequeue(cook);
+
+			if (cook)
+			{
+				WaitingFastFood.dequeue(FastFoodOrder);
+
+				int duration = static_cast<int>(ceil((double)FastFoodOrder->getSize() / cook->getSpeed()));
+				int seriveTime = CurrentTime + duration;
+				FastFoodOrder->setAT(CurrentTime);
+				FastFoodOrder->calcWT();
+				FastFoodOrder->setST(seriveTime);
+				FastFoodOrder->calcFT();
+				FastFoodOrder->setAssignedChef(cook);
+				int pri = FastFoodOrder->getPriority();
+				InserviceFastFood.enqueue(FastFoodOrder);
+
+				BusyChefs.enqueue(cook);
+				if (N != 0) N--;
+			}
+			else break;
+		}
+		// --- Handle SeaFood Orders ---
+		while (!WaitingSeaFood.isEmpty())
+		{
+			Order* SeaFoodOrder;
+			if (!WaitingSeaFood.peek(SeaFoodOrder)) break;
+
+			if (SeaFoodOrder->getRT() > CurrentTime) break;
+
+			Chef* cook = nullptr;
+			Chef* Assistant = nullptr;
+
+			if (!ReadySeaFood.isEmpty())
+				ReadySeaFood.dequeue(cook);
+			if (!ReadySeaFood.isEmpty())
+				ReadySeaFood.dequeue(Assistant);
+			if (cook && Assistant)
+			{
+				WaitingSeaFood.dequeue(SeaFoodOrder);
+
+				int duration = static_cast<int>(ceil((double)SeaFoodOrder->getSize() / cook->getSpeed()));
+				int seriveTime = CurrentTime + duration;
+				SeaFoodOrder->setAT(CurrentTime);
+				SeaFoodOrder->calcWT();
+				SeaFoodOrder->setST(seriveTime);
+				SeaFoodOrder->calcFT();
+				SeaFoodOrder->setAssignedChef(cook);
+				SeaFoodOrder->setAssignedAssistant(Assistant);
+				int pri = SeaFoodOrder->getPriority();
+				InserviceOrders.enqueue(SeaFoodOrder, pri);
+
+				BusyChefs.enqueue(cook);
+				if (N != 0) N--;
+			}
+			else break;
+		}
 	}
 	void ReturnFinishedCooks()
 	{
@@ -392,4 +471,12 @@ private:
 	LinkedQueue<Chef*> ReadyVegan; // done
 	LinkedQueue<Chef*> ReadyNormal; // done
 	LinkedQueue<Chef*> BusyChefs; // done
+
+
+	/// Bonus Lists ///
+	LinkedQueue <Chef*>ReadySeaFood;
+	LinkedQueue <Chef*>ReadyFastFood;
+	LinkedQueue <Order*>WaitingSeaFood;
+	LinkedQueue <Order*>WaitingFastFood;
+	LinkedQueue <Order*>InserviceFastFood;   ///This new list is done to keep the fast food running sepqrately from all other types
 };

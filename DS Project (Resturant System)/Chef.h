@@ -25,6 +25,8 @@ public:
         if (str == "Normal") return Normal;
         else if (str == "Vegan") return Vegan;
         else if (str == "VIP") return VIP;
+        else if (str == "S") return Sea;
+        else if (str == "F") return Fast;
     }
     Type getType() const;
     int getID() const;

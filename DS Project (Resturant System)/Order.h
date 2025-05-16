@@ -7,7 +7,7 @@ using namespace std;
 class Chef;
 enum Type
 {
-	Normal=1, Vegan=2, VIP=3
+	Normal=1, Vegan=2, VIP=3, Sea, Fast
 };
 class Order 
 {
@@ -101,6 +101,8 @@ public:
 	Type stringToOrderType(const string& str) {
 		if (str == "G") return Vegan;
 		else if (str == "V") return VIP;
+		else if (str == "S") return Sea;
+		else if (str == "F") return Fast;
 		else return Normal;
 	}
 	double getPriority() const
@@ -110,6 +112,10 @@ public:
 	friend ostream& operator<<(ostream& os, const Order& order);
 	void setAssignedChef(Chef* chef) {
 		AssignedChef = chef;
+	}
+	void setAssignedAssistant(Chef* chef)
+	{
+		AssistantChef = chef;
 	}
 
 	Chef* getAssignedChef() const {
@@ -129,6 +135,7 @@ private:
 	int Size;
 	double Priority;
 	Chef* AssignedChef = nullptr;
+	Chef* AssistantChef = nullptr;
 
 };
 
