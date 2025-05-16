@@ -523,7 +523,23 @@ public:
 		}
 	}
 	
+	/*Chef* RandomInjry(LinkedQueue<Chef*> List)
+	{
+		Chef* Head = nullptr;
+		List.peek(Head);
+		if (!Head) return nullptr;
 
+		Chef* current = Head;
+		int count = 1;
+		srand(time(0));
+		while (current)
+		{
+			if (rand() > 10 && rand() < 25)
+			{
+				current->setInjured(true);
+			}
+		}
+	}*/
 	
 
 
