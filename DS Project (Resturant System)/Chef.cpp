@@ -24,5 +24,15 @@ int Chef::getSpeed() const
 
 int Chef::getRT() const
 {
-	return 0;
+	return RT;
+}
+
+int Chef::getBD() const
+{
+	return BD;
+}
+
+bool Chef::getInjured() const
+{
+	return injured;
 }

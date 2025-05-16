@@ -81,22 +81,35 @@ public:
 			istringstream iss(line);
 			iss >> N >> G>>V;
 		}
-		if (getline(file, line)) {
-			istringstream iss(line);
-			iss >> SN >> SG >> SV;
-		}
+		
 		for (int i = 1; i <= N;i++) {
-			Chef* c = new Chef(i, "Normal", SN);
-			ReadyNormal.enqueue(c);
+			int id = 0, S = 0, BD = 0,  RT = 0;
+			if (getline(file, line)) {
+				istringstream iss(line);
+				iss >> id >> S >> BD >> RT;
+				Chef* c = new Chef(i, "Normal", S, RT,BD);
+				ReadyNormal.enqueue(c);
+			}
 		}
 		for (int i = 1; i <= G;i++) {
-			Chef* c = new Chef(i, "Vegan", SN);
-			ReadyVegan.enqueue(c);
+			int id = 0, S = 0, BD = 0, RT = 0;
+			if (getline(file, line)) {
+				istringstream iss(line);
+				iss >> id >> S >> BD >> RT;
+				Chef* c = new Chef(i, "Vegan", S, RT, BD);
+				ReadyVegan.enqueue(c);
+			}
 		}
 		for (int i = 1; i <= V;i++) {
-			Chef* c = new Chef(i, "VIP", SN);
-			ReadyVIP.enqueue(c);
+			int id = 0, S = 0, BD = 0, RT = 0;
+			if (getline(file, line)) {
+				istringstream iss(line);
+				iss >> id >> S >> BD >> RT;
+				Chef* c = new Chef(i, "VIP", S, RT, BD);
+				ReadyVIP.enqueue(c);
+			}
 		}
+
 		if (getline(file, line)) {
 			istringstream iss(line);
 			iss >> M;
@@ -226,6 +239,7 @@ public:
 				vipOrder->calcFT();
 				vipOrder->setAssignedChef(cook);
 				int pri = vipOrder->getPriority();
+				cout << vipOrder;
 				InserviceOrders.enqueue(vipOrder, pri);
 				
 				BusyChefs.enqueue(cook);
@@ -363,7 +377,7 @@ public:
 private:
 
 	int CurrentTime;
-	int N=0, G=0, V=0, SN=0, SV=0, SG=0, M=0;
+	int N=0, G=0, V=0, M=0;
 	///  Orders Lists ///
 
 	LinkedQueue<Order*> AllOrdersList; // done
