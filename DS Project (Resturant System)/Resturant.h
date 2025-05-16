@@ -70,10 +70,10 @@ public:
 				cout << endl;
 				cout << V << " Fastfood cooks: ";
 				ReadyFastFood.printQueue();
-				cout << "\n========================= Injured Cooks =========================\n";
+				/*cout << "\n========================= Injured Cooks =========================\n";
 				hospital.printQueue();
 				cout << "\n========================= Cooks On Break =========================\n";
-				inBreak.printQueue();
+				inBreak.printQueue();*/
 				PutInService();
 				cout << "\n=========================  In Service  =========================\n";
 				InserviceOrders.printQueue();
