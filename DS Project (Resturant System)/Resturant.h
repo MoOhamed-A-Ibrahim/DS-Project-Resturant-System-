@@ -242,7 +242,6 @@ public:
 
 	void PutInService()
 	{
-		CheckForInjuries();
 		while (!WaitingVIP.isEmpty())
 		{
 			Order* vipOrder;
