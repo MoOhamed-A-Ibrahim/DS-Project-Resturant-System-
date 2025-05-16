@@ -51,6 +51,10 @@ public:
 				WaitingVegan.printQueueRTBased(CurrentTime);
 				cout << WaitingVIP.numberOfElements(CurrentTime) << " VIP orders:\n";
 				WaitingVIP.printQueueRTBased(CurrentTime);
+				cout << WaitingSeaFood.numberOfElements(CurrentTime) << " Seafood orders:\n";
+				WaitingSeaFood.printQueueRTBased(CurrentTime);
+				cout << WaitingFastFood.numberOfElements(CurrentTime) << " Fastfood orders:\n";
+				WaitingFastFood.printQueueRTBased(CurrentTime);
 				cout <<  "\n========================= Available Cooks =========================\n";
 				cout << N << " NRM cooks: ";
 				ReadyNormal.printQueue();
@@ -60,10 +64,21 @@ public:
 				cout << endl;
 				cout << V << " VIP cooks: ";
 				ReadyVIP.printQueue();
-				
+				cout << endl;
+				cout << V << " Seafood cooks: ";
+				ReadySeaFood.printQueue();
+				cout << endl;
+				cout << V << " Fastfood cooks: ";
+				ReadyFastFood.printQueue();
+				cout << "\n========================= Injured Cooks =========================\n";
+				hospital.printQueue();
+				cout << "\n========================= Cooks On Break =========================\n";
+				inBreak.printQueue();
 				PutInService();
 				cout << "\n=========================  In Service  =========================\n";
 				InserviceOrders.printQueue();
+				cout << "\n=========================  In Service FastFood =========================\n";
+				InserviceFastFood.printQueue();
 				cout << "\n=========================  Delivered Orders =========================\n";
 				DeliveredOrders.printQueue();
 				cout << "\n\n\nPress any key to continue...\n";
@@ -79,37 +94,55 @@ public:
 		string line;
 		if (getline(file, line)) {
 			istringstream iss(line);
-			iss >> N >> G>>V;
+			iss >> N >> G>>V >> S >> F;
 		}
 		
 		for (int i = 1; i <= N;i++) {
-			int id = 0, S = 0, BD = 0,  RT = 0;
+			int id = 0, speed = 0, BD = 0,  RT = 0;
 			if (getline(file, line)) {
 				istringstream iss(line);
-				iss >> id >> S >> BD >> RT;
+				iss >> id >> speed >> BD >> RT;
 				Chef* c = new Chef(i, "Normal", S, RT,BD);
 				ReadyNormal.enqueue(c);
 			}
 		}
 		for (int i = 1; i <= G;i++) {
-			int id = 0, S = 0, BD = 0, RT = 0;
+			int id = 0, speed = 0, BD = 0, RT = 0;
 			if (getline(file, line)) {
 				istringstream iss(line);
-				iss >> id >> S >> BD >> RT;
+				iss >> id >> speed >> BD >> RT;
 				Chef* c = new Chef(i, "Vegan", S, RT, BD);
 				ReadyVegan.enqueue(c);
 			}
 		}
 		for (int i = 1; i <= V;i++) {
-			int id = 0, S = 0, BD = 0, RT = 0;
+			int id = 0, speed = 0, BD = 0, RT = 0;
 			if (getline(file, line)) {
 				istringstream iss(line);
-				iss >> id >> S >> BD >> RT;
+				iss >> id >> speed >> BD >> RT;
 				Chef* c = new Chef(i, "VIP", S, RT, BD);
 				ReadyVIP.enqueue(c);
 			}
 		}
+		for (int i = 1; i <= S;i++) {
+			int id = 0, speed = 0, BD = 0, RT = 0;
+			if (getline(file, line)) {
+				istringstream iss(line);
+				iss >> id >> speed >> BD >> RT;
+				Chef* c = new Chef(i, "S", S, RT, BD);
+				ReadySeaFood.enqueue(c);
+			}
+		}
 
+		for (int i = 1; i <= F;i++) {
+			int id = 0, speed = 0, BD = 0, RT = 0;
+			if (getline(file, line)) {
+				istringstream iss(line);
+				iss >> id >> speed >> BD >> RT;
+				Chef* c = new Chef(i, "F", S, RT, BD);
+				ReadyFastFood.enqueue(c);
+			}
+		}
 		if (getline(file, line)) {
 			istringstream iss(line);
 			iss >> M;
@@ -142,6 +175,12 @@ public:
 		case 3:
 			WaitingVIP.enqueue(NewOrder, NewOrder->getPriority());
 			break;
+		case 4:
+			WaitingSeaFood.enqueue(NewOrder);
+			break;
+		case 5 :
+			WaitingFastFood.enqueue(NewOrder);
+			break;
 		}
 
 	}
@@ -166,7 +205,7 @@ public:
 
 		outFile << "FT\tID\tAT\tWT\tST\n";
 		double totalWT = 0, totalST = 0;
-		int countNormal = 0, countVegan = 0, countVIP = 0;
+		int countNormal = 0, countVegan = 0, countVIP = 0, countFast = 0, countSea = 0;
 
 		for (Order* ord : orders) {
 			int FT = ord->getFT();
@@ -185,6 +224,8 @@ public:
 			case Normal: countNormal++; break;
 			case Vegan: countVegan++; break;
 			case VIP: countVIP++; break;
+			case Sea: countSea++; break;
+			case Fast: countFast++; break;
 			}
 		}
 
@@ -201,6 +242,7 @@ public:
 
 	void PutInService()
 	{
+		CheckForInjuries();
 		while (!WaitingVIP.isEmpty())
 		{
 			Order* vipOrder;
@@ -331,33 +373,27 @@ public:
 		// --- Handle FastFood Orders ---
 		while (!WaitingFastFood.isEmpty())
 		{
-			Order* FastFoodOrder;
-			if (!WaitingFastFood.peek(FastFoodOrder)) break;
+			Order* fastOrder;
+			if (!WaitingFastFood.peek(fastOrder)) break;
 
-			if (FastFoodOrder->getRT() > CurrentTime) break;
+			if (fastOrder->getRT() > CurrentTime) break;
 
 			Chef* cook = nullptr;
 
-
-			if (!ReadyFastFood.isEmpty())
-				ReadyFastFood.dequeue(cook);
+			if (!ReadyFastFood.isEmpty()) ReadyFastFood.dequeue(cook);
 
 			if (cook)
 			{
-				WaitingFastFood.dequeue(FastFoodOrder);
-
-				int duration = static_cast<int>(ceil((double)FastFoodOrder->getSize() / cook->getSpeed()));
-				int seriveTime = CurrentTime + duration;
-				FastFoodOrder->setAT(CurrentTime);
-				FastFoodOrder->calcWT();
-				FastFoodOrder->setST(seriveTime);
-				FastFoodOrder->calcFT();
-				FastFoodOrder->setAssignedChef(cook);
-				int pri = FastFoodOrder->getPriority();
-				InserviceFastFood.enqueue(FastFoodOrder);
-
+				WaitingFastFood.dequeue(fastOrder);
+				int duration = static_cast<int>(ceil((double)fastOrder->getSize() / cook->getSpeed()));
+				int serviceTime = CurrentTime + duration;
+				fastOrder->setAT(CurrentTime);
+				fastOrder->calcWT();
+				fastOrder->setST(serviceTime);
+				fastOrder->calcFT();
+				fastOrder->setAssignedChef(cook);
+				InserviceFastFood.enqueue(fastOrder);  
 				BusyChefs.enqueue(cook);
-				if (N != 0) N--;
 			}
 			else break;
 		}
@@ -392,7 +428,7 @@ public:
 				InserviceOrders.enqueue(SeaFoodOrder, pri);
 
 				BusyChefs.enqueue(cook);
-				if (N != 0) N--;
+				if (S != 0) S--;
 			}
 			else break;
 		}
@@ -431,6 +467,10 @@ public:
 						ReadyVIP.enqueue(returnedCook);
 						V++;
 					}
+					else if (type == Sea) {
+						ReadySeaFood.enqueue(returnedCook);
+						S++;
+					}
 				}
 
 				DeliveredOrders.enqueue(finishedOrder);
@@ -440,7 +480,36 @@ public:
 				tempQueue.enqueue(finishedOrder, pri);
 			}
 		}
+		LinkedQueue<Order*> tempFastQueue;
+		Order* finishedFastOrder;
+		while (!InserviceFastFood.isEmpty())
+		{
+			InserviceFastFood.dequeue(finishedFastOrder);
 
+			if (finishedFastOrder->getFT() == CurrentTime)
+			{
+
+				Chef* returnedCook = finishedFastOrder->getAssignedChef();
+
+				if (returnedCook)
+				{
+					Type type = returnedCook->getType();
+
+					if (type == Fast)
+					{
+						ReadyFastFood.enqueue(returnedCook);
+						F++;
+					}
+					
+				}
+
+				DeliveredOrders.enqueue(finishedFastOrder);
+			}
+			else
+			{
+				tempFastQueue.enqueue(finishedFastOrder);
+			}
+		}
 		Order* order;
 		
 		while (!tempQueue.isEmpty())
@@ -448,15 +517,22 @@ public:
 			tempQueue.dequeue(order, pri);
 			InserviceOrders.enqueue(order, pri);
 		}
+		while (!tempFastQueue.isEmpty())
+		{
+			tempFastQueue.dequeue(order);
+			InserviceFastFood.enqueue(order);
+		}
 	}
+	
 
+	
 
 
 
 private:
 
 	int CurrentTime;
-	int N=0, G=0, V=0, M=0;
+	int N=0, G=0, V=0,S=0,F=0, M=0;
 	///  Orders Lists ///
 
 	LinkedQueue<Order*> AllOrdersList; // done
@@ -474,9 +550,11 @@ private:
 
 
 	/// Bonus Lists ///
-	LinkedQueue <Chef*>ReadySeaFood;
-	LinkedQueue <Chef*>ReadyFastFood;
-	LinkedQueue <Order*>WaitingSeaFood;
-	LinkedQueue <Order*>WaitingFastFood;
-	LinkedQueue <Order*>InserviceFastFood;   ///This new list is done to keep the fast food running sepqrately from all other types
+	LinkedQueue <Chef*>ReadySeaFood; //done
+	LinkedQueue <Chef*>ReadyFastFood; //done
+	LinkedQueue <Order*>WaitingSeaFood; //done
+	LinkedQueue <Order*>WaitingFastFood; //done
+	LinkedQueue <Order*>InserviceFastFood;  //done ///This new list is done to keep the fast food running sepqrately from all other types
+	LinkedQueue <Chef*> hospital;
+	LinkedQueue <Chef*> inBreak;
 };

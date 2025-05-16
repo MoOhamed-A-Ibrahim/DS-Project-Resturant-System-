@@ -33,7 +33,12 @@ public:
     int getSpeed() const;
     int getRT() const;
     int getBD() const;
+    void setInjured(bool state);
     bool getInjured() const;
+    void restoreSpeed();
+    int getBreakDuration(int currentTime);
+    void putInBreak(bool state);
+    bool needsBreak(int currentTime);
 private:
     int ID;
     int CookSpeed;
@@ -41,4 +46,5 @@ private:
     int RT;
     int BD;
     bool injured = false;
+    bool inBreak = false;
 };
