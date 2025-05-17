@@ -21,7 +21,8 @@ public:
 	{
 
 	}
-	void Run() {
+	void Run() 
+	{
 		ReadFromFile();
 		int choice;
 		cout << "================== Welcome The Resturant Simulation ==================\n";
