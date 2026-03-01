@@ -41,7 +41,7 @@
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
     <ProjectGuid>{e5a5d2f0-fc07-45e1-9aef-49181bcf119c}</ProjectGuid>
-    <RootNamespace>DSProjectResturantSystem</RootNamespace>
+    <RootNamespace>RestaurantSimulation</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
